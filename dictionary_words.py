@@ -1,9 +1,8 @@
 import sys
 import random
-current_input = sys.argv
 
 
-def dictionary_words(word_number):
+def dictionary_words():
     # Get words from file
     with open('/usr/share/dict/words') as f:
         raw_data = f.readlines()
@@ -11,15 +10,21 @@ def dictionary_words(word_number):
         words_array = []
         for index in raw_data_list:
             words_array.append(index.replace('\n', ''))
+    return words_array
 
+
+def create_sentence(words_array, word_number):
     # Create random sentence
     sentence = ""
     for index in range(0, word_number):
         rand_num = random.randint(0, len(words_array) - 1)
         sentence += words_array[rand_num] + " "
         words_array.pop(rand_num)
-    print(sentence)
+    return sentence
 
 
 if __name__ == "__main__":
-    dictionary_words(int(current_input[1]))
+    current_input = sys.argv
+    words_array = dictionary_words()
+    sentence = create_sentence(words_array, int(current_input[1]))
+    print(sentence)
