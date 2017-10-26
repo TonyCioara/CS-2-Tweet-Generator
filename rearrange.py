@@ -1,4 +1,3 @@
-
 import sys
 import random
 current_input = sys.argv
