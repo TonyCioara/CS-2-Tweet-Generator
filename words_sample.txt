@@ -1,10 +1,1 @@
-Anagram
-Bee
-Cast
-Dice
-Fight
-Hotel
-Introvert
-Kilogram
-Mute
-Weigh
+Anagram Bee Cast Dice Fight Hotel Introvert Kilogram Mute Weigh Mute Mute.Kilograms
