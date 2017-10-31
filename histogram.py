@@ -1,5 +1,6 @@
 import re
 import sys
+import time
 
 
 def create_data():
@@ -51,13 +52,24 @@ def list_frequency(word, histogram):
 def histogram_list(data_list):
     """Takes in list of words.
     Returns list of lists, containing words and frequency"""
-    final_data_list = [[w, data_list.count(w)] for w in data_list]
+    final_data_list = []
+    for word in data_list:
+        to_create = True
+        for sub_list in final_data_list:
+            if sub_list[0] == word:
+                to_create = False
+                sub_list[1] += 1
+                break
+        if to_create is True:
+            sub_list = [word, 1]
+            final_data_list.append(sub_list)
     return(final_data_list)
 
 
 if __name__ == "__main__":
     current_input = sys.argv[1]
     input_word = sys.argv[2]
+    initial_time = time.time()
     if current_input == "dict":
         data_list = create_data()
         histogram_dict = histogram_dict(data_list)
@@ -70,3 +82,6 @@ if __name__ == "__main__":
         print(histogram_list)
         print("Unique words:", unique_words(histogram_list))
         print(input_word, ":", list_frequency(input_word, histogram_list))
+    final_time = time.time()
+    run_time = final_time - initial_time
+    print("Run time =", run_time)
