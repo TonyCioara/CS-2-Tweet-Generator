@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 
 def main():
+    """Create sentence to display on website"""
     word_num = 30
     data_list = Stochastic.create_data()
     histogram = Stochastic.create_histogram(data_list)
@@ -12,7 +13,7 @@ def main():
     return sentence
 
 
-@app.route('/')
+@app.route('/sentence')
 def add_sentence():
     sentence = main()
     return sentence
