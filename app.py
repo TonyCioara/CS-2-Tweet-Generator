@@ -13,7 +13,7 @@ def main():
     return sentence
 
 
-@app.route('/sentence')
+@app.route('/')
 def add_sentence():
     sentence = main()
     return sentence
