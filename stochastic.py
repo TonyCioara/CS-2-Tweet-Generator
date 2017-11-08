@@ -6,10 +6,25 @@ import random
 
 class Stochastic:
 
-    def create_data():
+    def __init__(self, text_file):
+        """Init stochastic object
+        Takes in name of file"""
+        self.text_file = text_file
+        data_list = self.create_data()
+        self.histogram = self.create_histogram(data_list)
+        self.total_word_count = self.count_words()
+
+    def count_words(self):
+        """Count all the words in the histogram"""
+        total_word_count = 0
+        for key in self.histogram:
+            total_word_count += self.histogram[key]
+        return total_word_count
+
+    def create_data(self):
         """Takes no parameters.
         Returns a list of all words in the file"""
-        with open('dracula.txt') as words_file:
+        with open(self.text_file) as words_file:
             raw_data = words_file.read()
             raw_data = raw_data.lower()
             raw_data = raw_data.replace('\n', ' ')
@@ -17,7 +32,7 @@ class Stochastic:
             data_list = raw_data.split(" ")
             return data_list
 
-    def create_histogram(data_list):
+    def create_histogram(self, data_list):
         """Takes in list of words.
         Returns dictionary of words and frequency"""
         histogram = {}
@@ -26,28 +41,25 @@ class Stochastic:
             histogram[word] = get(word, 0) + 1
         return histogram
 
-    def create_sentence(word_num, histogram):
+    def create_sentence(self, word_num):
         """Takes in number of words in sentence, and histogram.
         Returns sentence."""
-        total_word_count = 0
-        for key in histogram:
-            total_word_count += histogram[key]
 
         sentence = []
         for index in range(0, word_num):
-            word = Stochastic.stochastic(histogram, total_word_count)
+            word = self.stochastic()
             sentence.append(word)
         return " ".join(sentence)
         # return sentence
 
-    def stochastic(histogram, total_word_count):
+    def stochastic(self):
         """Takes in histogram and total word count.
         Returns random word based on probability"""
-        index = random.randint(1, total_word_count)
+        index = random.randint(1, self.total_word_count)
 
-        for key in histogram:
-            if index > histogram[key]:
-                index -= histogram[key]
+        for key in self.histogram:
+            if index > self.histogram[key]:
+                index -= self.histogram[key]
             else:
                 return key
 
@@ -55,10 +67,10 @@ class Stochastic:
 if __name__ == "__main__":
     start_time = time.time()
     word_num = int(sys.argv[1])
-    data_list = Stochastic.create_data()
-    histogram = Stochastic.create_histogram(data_list)
-    sentence = Stochastic.create_sentence(word_num, histogram)
-    # sentence_histogram = create_histogram(sentence)
+    text_file = 'dracula.txt'
+    dracula_stochastic = Stochastic('dracula.txt')
+    sentence = dracula_stochastic.create_sentence(word_num)
+
     end_time = time.time()
     run_time = end_time - start_time
     # print(sentence_histogram)
