@@ -4,7 +4,7 @@ import time
 import random
 
 
-class Stochastic:
+class Stochastic(dict):
 
     def __init__(self, text_file):
         """Init stochastic object
