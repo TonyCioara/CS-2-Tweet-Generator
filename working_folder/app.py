@@ -1,15 +1,15 @@
 import os
 from flask import Flask
-from stochastic import Stochastic
+from markov_chain import MarkovChain
 app = Flask(__name__)
 
 
 def main():
     """Create sentence to display on website"""
     word_num = 30
-    data_list = Stochastic.create_data()
-    histogram = Stochastic.create_histogram(data_list)
-    sentence = Stochastic.create_sentence(word_num, histogram)
+    text_file = 'dracula.txt'
+    markov_chain = MarkovChain(text_file)
+    sentence = markov_chain.create_sentence(word_num)
     return sentence
 
 
