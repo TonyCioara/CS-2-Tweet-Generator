@@ -36,9 +36,8 @@ class MarkovChain(object):
         Returns a list of all words in the file"""
         with open(self.text_file) as words_file:
             raw_data = words_file.read()
-            raw_data = raw_data.lower()
             raw_data = raw_data.replace('\n', ' ')
-            raw_data = re.sub('[^a-z]+', ' ', raw_data)
+            raw_data = re.sub('[^a-zA-Z]+', ' ', raw_data)
             data_list = raw_data.split(" ")
             return data_list
 
