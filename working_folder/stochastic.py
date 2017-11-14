@@ -69,11 +69,12 @@ if __name__ == "__main__":
     start_time = time.time()
     word_num = int(sys.argv[1])
     text_file = 'dracula.txt'
-    dracula_stochastic = Stochastic('dracula.txt')
+    dracula_stochastic = Stochastic(text_file)
     sentence = dracula_stochastic.create_sentence(word_num)
 
     end_time = time.time()
     run_time = end_time - start_time
     # print(sentence_histogram)
     print(sentence)
+    # print(dracula_stochastic.total_word_count)
     print("Run time:", run_time)
