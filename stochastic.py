@@ -4,7 +4,7 @@ import time
 import random
 
 
-class Stochastic(dict):
+class Stochastic(object):
 
     def __init__(self, text_file):
         """Init stochastic object
@@ -57,22 +57,24 @@ class Stochastic(dict):
         Returns random word based on probability"""
         index = random.randint(1, self.total_word_count)
 
-        for key in self.histogram:
-            if index > self.histogram[key]:
-                index -= self.histogram[key]
+        for word in self.histogram:
+            frequency = self.histogram[word]
+            if index > frequency:
+                index -= frequency
             else:
-                return key
+                return word
 
 
 if __name__ == "__main__":
     start_time = time.time()
     word_num = int(sys.argv[1])
     text_file = 'dracula.txt'
-    dracula_stochastic = Stochastic('dracula.txt')
+    dracula_stochastic = Stochastic(text_file)
     sentence = dracula_stochastic.create_sentence(word_num)
 
     end_time = time.time()
     run_time = end_time - start_time
     # print(sentence_histogram)
     print(sentence)
+    # print(dracula_stochastic.total_word_count)
     print("Run time:", run_time)
