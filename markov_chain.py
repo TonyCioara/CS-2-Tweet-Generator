@@ -76,16 +76,7 @@ class MarkovChain(object):
     def stochastic(self, last_word):
         """If last word is passed in get word based on the last word.
         If last word is none, get random word"""
-        """if last_word is None:
-            index = random.randint(1, self.total_word_count)
-            for word in self.markov_chain:
-                word_dict = self.markov_chain[word]
-                frequency = word_dict.tokens
-                if index > frequency:
-                    index -= frequency
-                else:
-                    return word
-        else:"""
+
         index = random.randint(1, self.markov_chain[last_word].tokens)
         for word in self.markov_chain[last_word]:
             frequency = self.markov_chain[last_word].frequency(word)
