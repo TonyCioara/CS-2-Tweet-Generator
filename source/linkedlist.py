@@ -79,6 +79,15 @@ class LinkedList(object):
             node.next = new_node
             self.tail = new_node
 
+    def replace(self, item, new_item):
+        node = self.head
+        while node is not None:
+            if node.data == item:
+                node.data = new_item
+                return
+        raise ValueError('Item not found: {}'.format(item))
+
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(1) Why and under what conditions?
