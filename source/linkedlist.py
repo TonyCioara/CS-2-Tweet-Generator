@@ -111,8 +111,10 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        TODO: Best case running time: O(1) Why and under what conditions?
+            We delete the first item.
+        TODO: Worst case running time: O(n) Why and under what conditions?
+            We delete the last item."""
         # TODO: Loop through all nodes to find one whose data matches given item
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
