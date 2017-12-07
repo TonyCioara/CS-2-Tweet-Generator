@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from markov_chain import MarkovChain
+from markov_chain2 import MarkovChain
 app = Flask(__name__)
 
 
