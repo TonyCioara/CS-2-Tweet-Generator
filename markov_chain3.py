@@ -49,15 +49,19 @@ class MarkovChain(object):
         markov_chain['START'] = Dictogram()
         markov_chain['START'].add_count(data_list[0])
         word = None
+        middle_word = None
         for index in range(0, len(data_list) - 1):
             touple_key = None
-            last_word = word
+            last_word = middle_word
+            middle_word = word
             word = data_list[index]
             if word == 'START' or word == 'STOP':
                 touple_key = word
-            # elif last_word is not None:
             else:
-                touple_key = (last_word, word)
+                if last_word is None:
+                    touple_key = (middle_word, word)
+                else:
+                    touple_key = (last_word, middle_word, word)
                 print(touple_key)
             if touple_key is None:
                 pass
@@ -74,14 +78,18 @@ class MarkovChain(object):
         sentence = []
         word = 'START'
         last_word = None
+        middle_word = None
 
         for index in range(0, word_num):
-            if last_word is None:
+            if middle_word is None:
                 stochastic_key = word
+            elif last_word is None:
+                stochastic_key = (middle_word, word)
             else:
-                stochastic_key = (last_word, word)
+                stochastic_key = (last_word, middle_word, word)
             new_word = self.stochastic(stochastic_key)
-            last_word = word
+            last_word = middle_word
+            middle_word = word
             word = new_word
             if word == 'STOP':
                 sentence.append(".")
@@ -98,6 +106,7 @@ class MarkovChain(object):
         """If last word is passed in get word based on the last word.
         If last word is none, get random word"""
 
+        print(last_key, " ", self.markov_chain[last_key].tokens)
         index = random.randint(1, self.markov_chain[last_key].tokens)
         for word in self.markov_chain[last_key]:
             frequency = self.markov_chain[last_key].frequency(word)
