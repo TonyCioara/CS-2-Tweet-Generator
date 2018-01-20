@@ -6,7 +6,7 @@ import random
 
 
 def main():
-    word_num = int(sys.argv[1])
+    word_num = 25
     text_file = 'washington.txt'
     markov_chain = MarkovChain(text_file)
     #print(markov_chain.markov_chain)
@@ -58,11 +58,10 @@ class MarkovChain(object):
             if word == 'START' or word == 'STOP':
                 touple_key = word
             else:
-                if last_word is None:
+                if middle_word == "START":
                     touple_key = (middle_word, word)
                 else:
                     touple_key = (last_word, middle_word, word)
-                print(touple_key)
             if touple_key is None:
                 pass
             else:
