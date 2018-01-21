@@ -1,4 +1,4 @@
-import os
+import json
 from flask import Flask
 from markov_chain2 import MarkovChain
 app = Flask(__name__)
@@ -17,20 +17,32 @@ def add_sentence():
     sentence = main()
     return sentence
 
+
 @app.route('/FDR')
 def quote_FDR():
     sentence = main('FDR.txt')
-    return sentence
+    data = {}
+    data['sentence'] = sentence
+    json_data = json.dumps(data)
+    return json_data
+
 
 @app.route('/Washington')
 def quote_Washington():
     sentence = main('washington.txt')
-    return sentence
+    data = {}
+    data['sentence'] = sentence
+    json_data = json.dumps(data)
+    return json_data
+
 
 @app.route('/Lincoln')
 def quote_Lincoln():
     sentence = main('lincoln.txt')
-    return sentence
+    data = {}
+    data['sentence'] = sentence
+    json_data = json.dumps(data)
+    return json_data
 
 
 if __name__ == '__main__':
