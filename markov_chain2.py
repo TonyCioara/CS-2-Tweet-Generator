@@ -58,7 +58,6 @@ class MarkovChain(object):
             # elif last_word is not None:
             else:
                 touple_key = (last_word, word)
-                print(touple_key)
             if touple_key is None:
                 pass
             else:
@@ -84,15 +83,12 @@ class MarkovChain(object):
             last_word = word
             word = new_word
             if word == 'STOP':
-                sentence.append(".")
-                return " ".join(sentence)
+                sentence = " ".join(sentence)
+                sentence = sentence[:-1]
+                sentence += "."
+                return sentence
             sentence.append(word)
-        if len(sentence) >= word_num - 3:
-            return self.create_sentence(word_num)
-        else:
-            sentence.append(".")
-            return " ".join(sentence)
-        # return sentence
+        return self.create_sentence(word_num)
 
     def stochastic(self, last_key):
         """If last word is passed in get word based on the last word.

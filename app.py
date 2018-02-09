@@ -1,13 +1,20 @@
 import json
 from flask import Flask
-from markov_chain2 import MarkovChain
+from markov_chain3 import MarkovChain
+
+
 app = Flask(__name__)
+app.markov_chains = {}
+app.markov_chains['FDR'] = MarkovChain('FDR.txt')
+app.markov_chains['Lincoln'] = MarkovChain('lincoln.txt')
+app.markov_chains['Washington'] = MarkovChain('washington.txt')
 
 
 def main(text_file):
     """Create sentence to display on website"""
     word_num = 25
     markov_chain = MarkovChain(text_file)
+    # --
     sentence = markov_chain.create_sentence(word_num)
     return sentence
 
@@ -20,7 +27,7 @@ def add_sentence():
 
 @app.route('/FDR')
 def quote_FDR():
-    sentence = main('FDR.txt')
+    sentence = app.markov_chain['FDR'].create_sentence(25)
     data = {}
     data['sentence'] = sentence
     json_data = json.dumps(data)
@@ -29,7 +36,7 @@ def quote_FDR():
 
 @app.route('/Washington')
 def quote_Washington():
-    sentence = main('washington.txt')
+    sentence = app.markov_chain['Lincoln'].create_sentence(25)
     data = {}
     data['sentence'] = sentence
     json_data = json.dumps(data)
@@ -38,7 +45,7 @@ def quote_Washington():
 
 @app.route('/Lincoln')
 def quote_Lincoln():
-    sentence = main('lincoln.txt')
+    sentence = app.markov_chain['Washington'].create_sentence(25)
     data = {}
     data['sentence'] = sentence
     json_data = json.dumps(data)

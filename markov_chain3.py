@@ -91,21 +91,19 @@ class MarkovChain(object):
             middle_word = word
             word = new_word
             if word == 'STOP':
-                sentence.append(".")
-                return " ".join(sentence)
+                sentence = " ".join(sentence)
+                sentence = sentence[:-1]
+                sentence += "."
+                return sentence
             sentence.append(word)
-        if len(sentence) >= word_num - 3:
-            return self.create_sentence(word_num)
-        else:
-            sentence.append(".")
-            return " ".join(sentence)
+        return self.create_sentence(word_num)
+
         # return sentence
 
     def stochastic(self, last_key):
         """If last word is passed in get word based on the last word.
         If last word is none, get random word"""
 
-        print(last_key, " ", self.markov_chain[last_key].tokens)
         index = random.randint(1, self.markov_chain[last_key].tokens)
         for word in self.markov_chain[last_key]:
             frequency = self.markov_chain[last_key].frequency(word)
