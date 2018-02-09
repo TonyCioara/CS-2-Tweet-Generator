@@ -13,7 +13,7 @@ app.markov_chains['Washington'] = MarkovChain('washington.txt')
 def main():
     """Create sentence to display on website"""
     # --
-    sentence = app.markov_chains['Washington'].create_sentence(word_num)
+    sentence = app.markov_chains['Washington'].create_sentence(25)
     return sentence
 
 

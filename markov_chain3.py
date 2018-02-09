@@ -92,7 +92,6 @@ class MarkovChain(object):
             word = new_word
             if word == 'STOP':
                 sentence = " ".join(sentence)
-                sentence = sentence[:-1]
                 sentence += "."
                 return sentence
             sentence.append(word)
